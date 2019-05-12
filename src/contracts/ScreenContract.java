@@ -50,7 +50,7 @@ public class ScreenContract extends ScreenDecorator {
 	@Override
 	public void init(int w, int h) {
 		if (!(0 < w && 0 < h)) {
-			throw new PreCondError("Abscisse et/ou ordonnée négative(s)");
+			throw new PreCondError("Abscisse et/ou ordonnée négative(s) ou nulle(s)");
 		}
 		checkInvariant();
 		super.init(w, h);

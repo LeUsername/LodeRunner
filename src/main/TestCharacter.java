@@ -170,6 +170,12 @@ public class TestCharacter {
 		 else
 		 System.out.print("M");
 		 break;
+		 case FAK:
+		 if (character.getWdt() == x && character.getHgt() == y)
+		 System.out.print("@");
+		 else
+		 System.out.print("-");
+		 break;
 		 }
 		 }
 		 System.out.print("\n");

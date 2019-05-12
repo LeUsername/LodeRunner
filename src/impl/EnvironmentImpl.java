@@ -45,12 +45,15 @@ public class EnvironmentImpl extends ScreenImpl implements EnvironmentService {
 		// }
 		// System.out.print("\n");
 		// }
-		this.cellulesContent = cellulesContent;
+		if(cellulesContent == null)
+			this.cellulesContent = new HashMap<Cle, CellContentImpl>();
+		else
+			this.cellulesContent = cellulesContent;
 		for (int i = 0; i < e.getWidth(); i++) {
 			for (int j = 0; j < e.getHeight(); j++) {
 				Cle courante = new Cle(i, j);
-				if (cellulesContent.get(courante) == null) {
-					cellulesContent.put(courante, new CellContentImpl(new ArrayList<>(), new ArrayList<>()));
+				if (this.cellulesContent.get(courante) == null) {
+					this.cellulesContent.put(courante, new CellContentImpl(new ArrayList<>(), new ArrayList<>()));
 				}
 			}
 		}

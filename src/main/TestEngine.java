@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import contracts.EditableScreenContract;
+import contracts.EngineContract;
 import impl.EditableScreenImpl;
 import impl.EngineImpl;
 import impl.ItemImpl;
@@ -32,7 +33,7 @@ public class TestEngine {
 
 	@Before
 	public void beforeTests() {
-		engine = /*new EngineContract(*/new EngineImpl()/*)*/;
+		engine = new EngineContract(new EngineImpl());
 		EditableScreenContract ecran = new EditableScreenContract(new EditableScreenImpl());
 		guards = new ArrayList<>();
 		items = new ArrayList<>();

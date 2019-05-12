@@ -84,4 +84,19 @@ public class TestScreen {
 		assertEquals(Cell.PLT, ecran.getCellNature(WIDTH / 2, HEIGHT / 2));
 		ecran.Fill(WIDTH / 2, HEIGHT / 2);
 	}
+	
+	@Test
+	public void ladPositif() {
+		ecran.init(WIDTH, HEIGHT);
+		ecran.Lad(WIDTH / 2, HEIGHT / 2);
+		assertEquals(Cell.LAD, ecran.getCellNature(WIDTH / 2, HEIGHT / 2));
+	}
+	
+	@Test(expected = PreCondError.class)
+	public void ladNegatif() {
+		ecran.init(WIDTH, HEIGHT);
+		ecran.Lad(WIDTH / 2, HEIGHT / 2);
+		assertEquals(Cell.LAD, ecran.getCellNature(WIDTH / 2, HEIGHT / 2));
+		ecran.Lad(WIDTH / 2, HEIGHT / 2);
+	}
 }
