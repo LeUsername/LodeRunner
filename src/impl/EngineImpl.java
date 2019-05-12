@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import contracts.EnvironmentContract;
-import contracts.GuardContract;
 import contracts.PlayerContract;
 import service.Cell;
 import service.CharacterService;
@@ -271,7 +270,7 @@ public class EngineImpl implements EngineService {
 		for (Cle c : posGardes) {
 			GuardService g = /*new GuardContract(*/new GuardImpl()/*)*/;
 			g.init(c.x, c.y, environment, player, c.x, c.y);
-			cellules.get(new Cle(c.x, c.y)).getCharacter().add(g);
+//			cellules.get(new Cle(c.x, c.y)).getCharacter().add(g);
 			guards.add(g);
 		}
 		cellules.get(new Cle(xJoueur, yJoueur)).getCharacter().add(player);

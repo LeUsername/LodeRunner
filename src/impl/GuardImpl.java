@@ -66,7 +66,7 @@ public class GuardImpl extends CharacterImpl implements GuardService {
 				|| ((envi.getCellNature(x, y - 1) == Cell.EMP || envi.getCellNature(x, y - 1) == Cell.HOL
 						|| envi.getCellNature(x, y - 1) == Cell.HDR || envi.getCellNature(x, y - 1) == Cell.LAD)
 						&& (envi.getCellContent(x, y - 1).getCharacter().size() > 0) )) {
-			System.out.println((envi.getCellNature(x, y - 1) == Cell.PLT || envi.getCellNature(x, y - 1) == Cell.MTL));
+//			System.out.println((envi.getCellNature(x, y - 1) == Cell.PLT || envi.getCellNature(x, y - 1) == Cell.MTL));
 			if (getTarget().getWdt() < x) {
 				
 				return Move.LEFT;
@@ -76,9 +76,9 @@ public class GuardImpl extends CharacterImpl implements GuardService {
 				return Move.NEUTRAL;
 			}
 		}
-		System.out.println((envi.getCellNature(x, y - 1) == Cell.PLT || envi.getCellNature(x, y - 1) == Cell.MTL));
-		System.out.println(x);
-		System.out.println(y);
+//		System.out.println((envi.getCellNature(x, y - 1) == Cell.PLT || envi.getCellNature(x, y - 1) == Cell.MTL));
+//		System.out.println(x);
+//		System.out.println(y);
 		return Move.DOWN;
 	}
 

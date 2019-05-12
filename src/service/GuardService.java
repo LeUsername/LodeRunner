@@ -81,7 +81,7 @@ public interface GuardService extends CharacterService {
 	//   \and Dmin(|getWdt(G)-getWdt(getTarget(G))|, |getHgt(G)-getHgt(getTarget(G))|)=|getHgt(G)-getHgt(getTarget(G))| \and (getHgt(getTarget(G)) < getHgt(G))) => getBehaviour()==DOWN
 	
 	/* Constructor */
-	public void init(int h, int w, EnvironmentService envi, CharacterService target,int x , int y);
+	public void init(int w, int h, EnvironmentService envi, CharacterService target,int x , int y);
 	
 	/* Operators */
 	

@@ -6,10 +6,8 @@ import decorators.PlayerDecorator;
 import error.PostCondError;
 import impl.ItemImpl;
 import service.Cell;
-import service.CellContentService;
 import service.Command;
 import service.EnvironmentService;
-import service.ItemService;
 import service.PlayerService;
 
 public class PlayerContract extends PlayerDecorator {
@@ -26,23 +24,50 @@ public class PlayerContract extends PlayerDecorator {
 	public void step() {
 		Command command_at_pre = getEngine().getNextCommand();
 		EnvironmentService environment_at_pre = getEnvi();
-		Cell cell_enbas = environment_at_pre.getCellNature(getWdt(), getHgt() - 1);
-		Cell cell_gauche = environment_at_pre.getCellNature(getWdt() - 1, getHgt());
-		Cell cell_droite = environment_at_pre.getCellNature(getWdt() + 1, getHgt());
-		Cell cell_digL = environment_at_pre.getCellNature(getWdt() - 1, getHgt() - 1);
-		Cell cell_digR = environment_at_pre.getCellNature(getWdt() - 1, getHgt() - 1);
-		Cell cell_LadL = environment_at_pre.getCellNature(getWdt() - 1, getHgt() + 1);
-		Cell cell_LadR = environment_at_pre.getCellNature(getWdt() - 1, getHgt() + 1);
-		int c = environment_at_pre.getCellContent(getWdt(), getHgt() - 1).getCharacter().size();
-		int c_gauche = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getCharacter().size();
-		int c_droite = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getCharacter().size();
-		int f = environment_at_pre.getCellContent(getWdt() + 1, getHgt() - 1).getItem().size();
-		int f_droite = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getItem().size();
-		int f_gauche = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getItem().size();
-		int nb_i_gauche = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getItem().size();
-		int nb_i_droite = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getItem().size();
-		ArrayList<ItemImpl> i_droite = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getItem();
-		ArrayList<ItemImpl> i_gauche = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getItem();
+		Cell cell_enbas = null;
+		int c = 0;
+		if (getHgt() > 0) {
+			cell_enbas = environment_at_pre.getCellNature(getWdt(), getHgt() - 1);
+			c = environment_at_pre.getCellContent(getWdt(), getHgt() - 1).getCharacter().size();
+		}
+		Cell cell_gauche = null;
+		int c_gauche = 0;
+		int f_gauche = 0;
+		ArrayList<ItemImpl> i_gauche = new ArrayList<>();
+		int nb_i_droite = 0;
+		if (getWdt() > 0) {
+			cell_gauche = environment_at_pre.getCellNature(getWdt() - 1, getHgt());
+			c_gauche = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getCharacter().size();
+			f_gauche = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getItem().size();
+			i_gauche = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getItem();
+			nb_i_droite = environment_at_pre.getCellContent(getWdt() - 1, getHgt()).getItem().size();
+		}
+		Cell cell_droite = null;
+		int c_droite = 0;
+		int f_droite = 0;
+		int nb_i_gauche = 0;
+		ArrayList<ItemImpl> i_droite =new ArrayList<>();
+		if (getWdt() < getEnvi().getWidth() - 1) {
+			cell_droite = environment_at_pre.getCellNature(getWdt() + 1, getHgt());
+			c_droite = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getCharacter().size();
+			f_droite = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getItem().size();
+			nb_i_gauche = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getItem().size();
+			i_droite = environment_at_pre.getCellContent(getWdt() + 1, getHgt()).getItem();
+		}
+		Cell cell_digL = null;
+		if (getWdt() > 0 && getHgt() > 0)
+			cell_digL = environment_at_pre.getCellNature(getWdt() - 1, getHgt() - 1);
+		Cell cell_digR = null;
+		int f = 0;
+		if (getWdt() < getEnvi().getWidth() - 1 && getHgt() > 0) {
+			cell_digR = environment_at_pre.getCellNature(getWdt() + 1, getHgt() - 1);
+			f = environment_at_pre.getCellContent(getWdt() + 1, getHgt() - 1).getItem().size();}
+		Cell cell_LadL = null;
+		if (getWdt() > 0 && getHgt() < getEnvi().getHeight() - 1)
+			cell_LadL = environment_at_pre.getCellNature(getWdt() - 1, getHgt() + 1);
+		Cell cell_LadR = null;
+		if (getWdt() < getEnvi().getWidth() - 1 && getHgt() < getEnvi().getHeight() - 1)
+			cell_LadR = environment_at_pre.getCellNature(getWdt() + 1, getHgt() + 1);
 		checkInvariant();
 		super.step();
 		checkInvariant();

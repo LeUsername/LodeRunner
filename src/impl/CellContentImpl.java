@@ -26,7 +26,7 @@ public class CellContentImpl {
 			CharacterService p = (CharacterService) c;
 			return character.contains(p);
 		} else {
-		
+
 			return character.contains(c);
 		}
 	}

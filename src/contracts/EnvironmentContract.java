@@ -31,6 +31,8 @@ public class EnvironmentContract extends ScreenContract implements EnvironmentSe
 						for (CharacterService c2 : content.getCharacter()) {
 							if (c1 instanceof GuardService && c2 instanceof GuardService) {
 								if (!(((GuardService) c1).getId() == ((GuardService) c2).getId())) {
+									System.out.println(c1);
+									System.out.println(c2);
 									throw new InvariantError("Il y a plus d'un personnage dans une case");
 								}
 							}

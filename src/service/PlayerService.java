@@ -6,7 +6,7 @@ public interface PlayerService extends CharacterService {
 	
 //	public int getScore();
 	/* Constructor */
-	public void init(int h, int w, EnvironmentService envi, EngineService e);
+	public void init(int w, int h, EnvironmentService envi, EngineService e);
 
 	/* Invariants */
 

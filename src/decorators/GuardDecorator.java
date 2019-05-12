@@ -47,8 +47,8 @@ public class GuardDecorator extends CharacterDecorator implements GuardService {
 	}
 
 	@Override
-	public void init(int h, int w, EnvironmentService envi, CharacterService target, int x, int y) {
-		((GuardService) delegate).init(h, w, envi, target,x,y);
+	public void init(int w, int h, EnvironmentService envi, CharacterService target, int x, int y) {
+		((GuardService) delegate).init(w, h, envi, target,x,y);
 	}
 
 	@Override

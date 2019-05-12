@@ -1,18 +1,11 @@
 package contracts;
 
-import java.util.ArrayList;
-
 import decorators.GuardDecorator;
 import error.InvariantError;
 import error.PostCondError;
 import error.PreCondError;
-import impl.CellContentImpl;
-import impl.EditableScreenImpl;
-import impl.EnvironmentImpl;
-import impl.GuardImpl;
 import service.Cell;
 import service.CharacterService;
-import service.EditableScreenService;
 import service.EnvironmentService;
 import service.GuardService;
 import service.Move;
@@ -183,8 +176,8 @@ public class GuardContract extends GuardDecorator {
 		}
 	}
 
-	public void init(int h, int w, EnvironmentService envi, CharacterService target, int x, int y) {
-		((GuardService) delegate).init(h, w, envi, target, x, y);
+	public void init(int w, int h, EnvironmentService envi, CharacterService target, int x, int y) {
+		((GuardService) delegate).init(w, h, envi, target, x, y);
 		checkInvariant();
 	}
 
@@ -261,32 +254,46 @@ public class GuardContract extends GuardDecorator {
 		}
 	}
 
+	// La comparaison avec un clone ne se fait pas bien
 	public void step() {
 		checkInvariant();
+		/*Cell cellNature_at_pre = ((GuardService) delegate).getEnvi().getCellNature(getWdt(), getHgt());
+		Cell cellNatureEnBas_at_pre = ((GuardService) delegate).getEnvi().getCellNature(getWdt(), getHgt() - 1);
+		int nbCharaEnBas_at_pre = ((GuardService) delegate).getEnvi().getCellContent(getWdt(), getHgt() - 1)
+				.getCharacter().size();
+		int x_at_pre = ((GuardService) delegate).getWdt();
+		int y_at_pre = ((GuardService) delegate).getHgt();
+		int time_at_pre = ((GuardService) delegate).getTimeInHole();
 		GuardService guardClone = new GuardImpl();
 		EditableScreenService editableClone = new EditableScreenImpl();
 		editableClone.init(((GuardService) delegate).getEnvi());
 		EnvironmentService enviClone = new EnvironmentImpl();
 		enviClone.init(editableClone, editableClone.getWidth(), editableClone.getHeight(),
 				((GuardService) delegate).getEnvi().getAllCellContent());
-		CellContentImpl celluleClone = new CellContentImpl(
-				enviClone.getCellContent(guardClone.getWdt(), guardClone.getHgt()).getCharacter(), new ArrayList<>());
-		celluleClone.getCharacter().remove(this);
-		celluleClone.getCharacter().add(guardClone);
-		enviClone.setCellContent(guardClone.getWdt(), guardClone.getHgt(), celluleClone);
-		guardClone.init(((GuardService) delegate).getHgt(), ((GuardService) delegate).getWdt(), enviClone,
+		ArrayList<CharacterService> listeClone = new ArrayList<>();
+		listeClone.add(guardClone);
+		CellContentImpl celluleClone = new CellContentImpl(listeClone, new ArrayList<>());
+		// System.out.println("Clonae de " + (delegate));
+		// if (celluleClone.getCharacter().size() > 0) {
+		// celluleClone.getCharacter().size();
+		// celluleClone.getCharacter().remove(delegate);
+		// celluleClone.getCharacter().size();
+		// }
+		System.out.println(celluleClone.getCharacter().size());
+		// celluleClone.getCharacter().add(guardClone);
+		enviClone.getCellContent(guardClone.getWdt(), guardClone.getHgt()).getCharacter().add(guardClone);
+		guardClone.init(((GuardService) delegate).getWdt(), ((GuardService) delegate).getHgt(), enviClone,
 				((GuardService) delegate).getTarget(), ((GuardService) delegate).getXPos(),
 				((GuardService) delegate).getYPos());
-		int time_at_pre = ((GuardService) delegate).getTimeInHole();
-		Cell cellNature_at_pre = ((GuardService) delegate).getEnvi().getCellNature(getWdt(), getHgt());
-		Cell cellNatureEnBas_at_pre = ((GuardService) delegate).getEnvi().getCellNature(getWdt(), getHgt() - 1);
-		int nbCharaEnBas_at_pre = ((GuardService) delegate).getEnvi().getCellContent(getWdt(), getHgt() - 1)
-				.getCharacter().size();
-		int x_at_pre = ((GuardService) delegate).getWdt();
-		int y_at_pre = ((GuardService) delegate).getHgt();
+		// System.out.println("y " + guardClone.getYPos() + " x " +
+		// guardClone.getXPos());
+		// System.out.println(" x " + guardClone.getWdt() + " y " +
+		// guardClone.getHgt());
+		System.out.println(celluleClone.getCharacter().size());
+		System.out.println(this.getDelegate());*/
 		((GuardService) delegate).step();
 		checkInvariant();
-		if (cellNature_at_pre == Cell.HOL && time_at_pre < GuardImpl.TIMEBEFOREOUT) {
+		/*if (cellNature_at_pre == Cell.HOL && time_at_pre < GuardImpl.TIMEBEFOREOUT) {
 			if (!(((GuardService) delegate).getTimeInHole() == time_at_pre + 1)) {
 				throw new PostCondError("Le temps dans le trou aurait du être incrementé");
 			}
@@ -310,9 +317,11 @@ public class GuardContract extends GuardDecorator {
 						|| cellNatureEnBas_at_pre == Cell.LAD)
 				|| (nbCharaEnBas_at_pre > 0))) {
 			if (((GuardService) delegate).getBehaviour() == Move.LEFT) {
+				System.out.println("y " + guardClone.getHgt() + " x " + guardClone.getWdt());
 				guardClone.GoLeft();
 				if (!(guardClone.getHgt() == ((GuardService) delegate).getHgt()
 						&& guardClone.getWdt() == ((GuardService) delegate).getWdt())) {
+					System.out.println("y " + guardClone.getHgt() + " x " + guardClone.getWdt());
 					throw new PostCondError("Le garde n'a pas bien fait l'opération goLeft");
 				}
 			}
@@ -326,12 +335,14 @@ public class GuardContract extends GuardDecorator {
 			if (((GuardService) delegate).getBehaviour() == Move.DOWN) {
 				// System.out.println(guardClone.getHgt() + " et " + guardClone.getWdt());
 				guardClone.GoDown();
-//				System.out.println(guardClone.getEnvi().getCellNature(getWdt(), getHgt()));
-//				System.out.println(guardClone.getEnvi().getCellNature(getWdt(), getHgt() - 1));
+				// System.out.println(guardClone.getEnvi().getCellNature(getWdt(), getHgt()));
+				// System.out.println(guardClone.getEnvi().getCellNature(getWdt(), getHgt() -
+				// 1));
 				if (!(guardClone.getHgt() == ((GuardService) delegate).getHgt()
 						&& guardClone.getWdt() == ((GuardService) delegate).getWdt())) {
-					 System.out.println(guardClone.getHgt() + " et " + guardClone.getWdt());
-					 System.out.println(((GuardService) delegate).getHgt()+ " et "  +((GuardService) delegate).getWdt());
+					System.out.println(guardClone.getHgt() + " et " + guardClone.getWdt());
+					System.out
+							.println(((GuardService) delegate).getHgt() + " et " + ((GuardService) delegate).getWdt());
 					// System.out
 					// .println(((GuardService) delegate).getHgt() + " et " + ((GuardService)
 					// delegate).getWdt());
@@ -345,6 +356,6 @@ public class GuardContract extends GuardDecorator {
 					throw new PostCondError("Le garde n'a pas bien fait l'opération goUp");
 				}
 			}
-		}
+		}*/
 	}
 }

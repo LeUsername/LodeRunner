@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import contracts.EditableScreenContract;
-import contracts.EngineContract;
 import impl.EditableScreenImpl;
 import impl.EngineImpl;
 import impl.ItemImpl;
@@ -65,7 +64,7 @@ public class TestEngine {
 		for (int nb = 0; nb < NB_TRESORS; nb++) {
 			items2.add(new Cle(nb, 2));
 		}
-		for (int nb = 0; nb < 0; nb++) {
+		for (int nb = 0; nb < 1; nb++) {
 			guards2.add(new Cle(6, 3));
 			
 		}

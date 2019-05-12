@@ -71,12 +71,12 @@ public class EditableScreenContract extends ScreenContract implements EditableSc
 		checkInvariant();
 		if (!(GetxJoueur() == xJoueur && GetyJoueur() == yJoueur && GetposGardes().equals(posGardes)
 				&& GetposItems().equals(posItems))) {
-			System.out.println(GetxJoueur() == xJoueur);
-			System.out.println(GetxJoueur());
-			System.out.println(xJoueur);
-			System.out.println(GetyJoueur() == yJoueur);
-			System.out.println(GetposGardes().equals(posGardes));
-			System.out.println(GetposItems().equals(posItems));
+//			System.out.println(GetxJoueur() == xJoueur);
+//			System.out.println(GetxJoueur());
+//			System.out.println(xJoueur);
+//			System.out.println(GetyJoueur() == yJoueur);
+//			System.out.println(GetposGardes().equals(posGardes));
+//			System.out.println(GetposItems().equals(posItems));
 			throw new PostCondError("mauvaise initialisation");
 		}
 	}

@@ -1,12 +1,10 @@
 package impl;
 
-import error.PostCondError;
 import service.Cell;
 import service.Cle;
 import service.Command;
 import service.EngineService;
 import service.EnvironmentService;
-import service.ItemService;
 import service.PlayerService;
 
 public class PlayerImpl extends CharacterImpl implements PlayerService {
@@ -82,20 +80,13 @@ public class PlayerImpl extends CharacterImpl implements PlayerService {
 						|| envi.getCellNature(x + 1, y - 1).equals(Cell.HOL))) {
 
 					if (envi.getCellNature(x + 1, y - 1).equals(Cell.HOL)) {
-						// System.out.println("ici1");
 						int i = 0;
 						while (i < engine.getHoles().size()) {
-							// System.out.println(holes.get(i).getTemps());
 							HoleImpl courant = engine.getHoles().get(i);
-							// System.out.println("ici3");
 							if (courant.getX() == x + 1 && courant.getY() == y - 1) {
-								// System.out.println("ici7");
-								// System.out.println(engine.getHoles().size());
 								engine.getHoles().remove(courant);
 								engine.getEnvironment().Fill(getWdt() + 1, getHgt() - 1);
 								break;
-								// System.out.println("ici8");
-								// Un seul trou creusé à la fois => un seul trou qui se rebouche à la fois
 							}
 							i++;
 						}
@@ -118,17 +109,11 @@ public class PlayerImpl extends CharacterImpl implements PlayerService {
 						System.out.println("ici1");
 						int i = 0;
 						while (i < engine.getHoles().size()) {
-							// System.out.println(holes.get(i).getTemps());
 							HoleImpl courant = engine.getHoles().get(i);
-							// System.out.println("ici3");
 							if (courant.getX() == x - 1 && courant.getY() == y - 1) {
-								// System.out.println("ici7");
-								// System.out.println(engine.getHoles().size());
 								engine.getHoles().remove(courant);
 								engine.getEnvironment().Fill(getWdt() - 1, getHgt() - 1);
 								break;
-								// System.out.println("ici8");
-								// Un seul trou creusé à la fois => un seul trou qui se rebouche à la fois
 							}
 							i++;
 						}
