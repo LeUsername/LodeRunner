@@ -201,7 +201,7 @@ public class EngineImpl implements EngineService {
 
 				g.init(g.getXPos(), g.getYPos(), environment, player, g.getXPos(), g.getYPos());
 
-				getEnvironment().getCellContent(g.getXPos(), g.getYPos()).getCharacter().add(g);
+				//getEnvironment().getCellContent(g.getXPos(), g.getYPos()).getCharacter().add(g);
 			
 		
 			} else if (getEnvironment().getCellNature(g.getWdt(), g.getHgt()) == Cell.PLT) {
